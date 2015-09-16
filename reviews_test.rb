@@ -38,12 +38,12 @@ class ReviewsTest < Minitest::Test
     d.add_employee(e)
     assert_equal e.department_id, d.id
   end
-  #
-  # def test_get_employee_name
-  #   employee = Employee.new( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 85000)
-  #   assert_equal "Joanna", employee.name
-  # end
-  #
+
+  def test_get_employee_name
+    employee = Employee.create( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 85000)
+    assert_equal "Joanna", employee.name
+  end
+  
   # def test_get_employee_salary
   #   employee = Employee.new( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 85000)
   #   assert_equal 85000, employee.salary
