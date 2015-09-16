@@ -6,7 +6,8 @@ ActiveRecord::Base.establish_connection(
 )
 
 class Employee < ActiveRecord::Base
-
+  belongs_to :department
+  
   def recent_review
     @reviews.last
   end

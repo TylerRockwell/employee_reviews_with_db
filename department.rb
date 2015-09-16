@@ -6,13 +6,14 @@ ActiveRecord::Base.establish_connection(
 )
 
 class Department < ActiveRecord::Base
+  has_many :employees
 
   def add_employee(employee)
     employee.update(department_id: self.id)
   end
 
   def total_salary
-    @employees.reduce(0){|sum, employee| sum + employee.salary}
+    self.employees.sum(:salary)
   end
 
   def give_raise(total_amount)

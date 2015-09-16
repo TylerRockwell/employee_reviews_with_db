@@ -43,20 +43,20 @@ class ReviewsTest < Minitest::Test
     employee = Employee.create( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 85000)
     assert_equal "Joanna", employee.name
   end
-  
+
   def test_get_employee_salary
     employee = Employee.create( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 85000)
     assert_equal 85000, employee.salary
   end
 
-  # def test_get_department_salary
-  #   employee = Employee.new(name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
-  #   employee2 = Employee.new(name: "Lunk", email: "lunk@example.com", phone: "882-329-3843", salary: 150000)
-  #   development = Department.new("Development")
-  #   development.add_employee(employee)
-  #   development.add_employee(employee2)
-  #   assert_equal 230000, development.total_salary
-  # end
+  def test_get_department_salary
+    employee = Employee.create(name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
+    employee2 = Employee.create(name: "Lunk", email: "lunk@example.com", phone: "882-329-3843", salary: 150000)
+    development = Department.create(name: "Development")
+    development.add_employee(employee)
+    development.add_employee(employee2)
+    assert_equal 230000, development.total_salary
+  end
   #
   # def test_employees_can_be_reviewed
   #   employee = Employee.new(name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
