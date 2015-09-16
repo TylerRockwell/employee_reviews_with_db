@@ -88,19 +88,19 @@ class ReviewsTest < Minitest::Test
     assert_equal 20000, employee3.salary
   end
 
-  # def test_only_satisfactory_employees_get_raises
-  #   employee = Employee.new( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
-  #   employee2 = Employee.new( name: "Lunk", email: "lunk@example.com", phone: "882-329-3843", salary: 150000)
-  #   employee2.give_review("bad negative less")
-  #
-  #   development = Department.new("Development")
-  #   development.add_employee(employee)
-  #   development.add_employee(employee2)
-  #
-  #   development.give_raise(10000)
-  #   assert_equal 90000, employee.salary
-  #   assert_equal 150000, employee2.salary
-  # end
+  def test_only_satisfactory_employees_get_raises
+    employee = Employee.new( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
+    employee2 = Employee.new( name: "Lunk", email: "lunk@example.com", phone: "882-329-3843", salary: 150000)
+    employee2.give_review("bad negative less")
+
+    development = Department.new("Development")
+    development.add_employee(employee)
+    development.add_employee(employee2)
+
+    development.give_raise(10000)
+    assert_equal 90000, employee.salary
+    assert_equal 150000, employee2.salary
+  end
   #
   # def test_no_raises_for_all_bad_employees
   #   employee = Employee.new( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
