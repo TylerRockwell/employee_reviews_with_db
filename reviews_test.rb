@@ -65,16 +65,16 @@ class ReviewsTest < Minitest::Test
   end
 
   def test_new_employees_should_be_satisfactory
-    employee = Employee.new(name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
+    employee = Employee.create(name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
     assert employee.satisfactory?
   end
-  
-  # def test_employees_can_get_raises
-  #   employee = Employee.new( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
-  #   employee.give_raise(5000)
-  #   assert_equal 85000, Employee.find(employee.id).salary
-  # end
-  #
+
+  def test_employees_can_get_raises
+    employee = Employee.create( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
+    employee.give_raise(5000)
+    assert_equal 85000, Employee.find(employee.id).salary
+  end
+
   # def test_whole_departments_can_get_raises
   #   employee = Employee.new( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
   #   employee2 = Employee.new( name: "Lunk", email: "lunk@example.com", phone: "882-329-3843", salary: 150000)
