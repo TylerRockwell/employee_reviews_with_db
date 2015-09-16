@@ -20,4 +20,8 @@ class Department < ActiveRecord::Base
     getting_raise = employees.select {|e| e.satisfactory?}
     getting_raise.each {|e| e.give_raise(total_amount / getting_raise.length)}
   end
+
+  def number_of_employees
+    employees.where(department_id: self.id).count(:id)
+  end
 end
