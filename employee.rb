@@ -5,7 +5,7 @@ ActiveRecord::Base.establish_connection(
   database:   'hr.sqlite3'
 )
 
-class Employee
+class Employee < ActiveRecord::Base
 
   attr_reader :name, :salary
 

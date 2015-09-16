@@ -5,14 +5,7 @@ ActiveRecord::Base.establish_connection(
   database:   'hr.sqlite3'
 )
 
-class Department
-
-  attr_reader :name, :employees
-
-  def initialize(name)
-    @name = name
-    @employees = []
-  end
+class Department < ActiveRecord::Base
 
   def add_employee(employee)
     @employees << employee

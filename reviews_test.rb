@@ -16,13 +16,10 @@ ProjectMigration.migrate(:up)
 class ReviewsTest < Minitest::Test
 
   def test_create_new_department
-    assert Department.new("Development")
-    assert_raises(ArgumentError) do
-      Department.new()
-    end
-    assert_raises(ArgumentError) do
-      Department.new(1,2)
-    end
+    assert Department.create(name: "Development")
+    assert_raises(ActiveRecord::UnknownAttributeError) do
+     Department.create(hours: "6")
+   end
   end
 
   def test_create_new_employee
