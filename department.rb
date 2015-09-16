@@ -8,7 +8,7 @@ ActiveRecord::Base.establish_connection(
 class Department < ActiveRecord::Base
 
   def add_employee(employee)
-    @employees << employee
+    employee.update(department_id: self.id)
   end
 
   def total_salary
