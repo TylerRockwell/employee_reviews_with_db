@@ -7,17 +7,6 @@ ActiveRecord::Base.establish_connection(
 
 class Employee < ActiveRecord::Base
 
-  attr_reader :name, :salary
-
-  def initialize(name:, salary:, email: nil, phone: nil)
-    @name = name
-    @salary = salary
-    @email = email
-    @phone = phone
-    @reviews = []
-    @satisfactory = true
-  end
-
   def recent_review
     @reviews.last
   end
