@@ -14,7 +14,7 @@ class Employee < ActiveRecord::Base
   end
 
   def satisfactory?
-    @satisfactory
+    self.satisfactory
   end
 
   def give_raise(amount)
@@ -23,7 +23,6 @@ class Employee < ActiveRecord::Base
 
   def give_review(review)
     Review.create(employee_id: self.id, review: review)
-    true
   end
 
   def assess_performance

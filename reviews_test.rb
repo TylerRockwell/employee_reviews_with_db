@@ -64,11 +64,11 @@ class ReviewsTest < Minitest::Test
     assert employee.give_review("This employee started off great. Not as impressed with her recent performance.")
   end
 
-  # def test_new_employees_should_be_satisfactory
-  #   employee = Employee.new(name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
-  #   assert employee.satisfactory?
-  # end
-  #
+  def test_new_employees_should_be_satisfactory
+    employee = Employee.new(name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
+    assert employee.satisfactory?
+  end
+  
   # def test_employees_can_get_raises
   #   employee = Employee.new( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
   #   employee.give_raise(5000)

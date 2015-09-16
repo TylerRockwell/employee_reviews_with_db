@@ -13,6 +13,7 @@ class ProjectMigration < ActiveRecord::Migration
       t.string    :email
       t.string    :phone
       t.integer   :salary
+      t.boolean   :satisfactory,     default: true
       t.timestamps
     end
 
