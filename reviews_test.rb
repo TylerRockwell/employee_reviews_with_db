@@ -89,32 +89,32 @@ class ReviewsTest < Minitest::Test
   end
 
   def test_only_satisfactory_employees_get_raises
-    employee = Employee.new( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
-    employee2 = Employee.new( name: "Lunk", email: "lunk@example.com", phone: "882-329-3843", salary: 150000)
+    employee = Employee.create( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
+    employee2 = Employee.create( name: "Lunk", email: "lunk@example.com", phone: "882-329-3843", salary: 150000)
     employee2.give_review("bad negative less")
 
-    development = Department.new("Development")
+    development = Department.create(name: "Development")
     development.add_employee(employee)
     development.add_employee(employee2)
 
     development.give_raise(10000)
-    assert_equal 90000, employee.salary
+    assert_equal 90000, employee.reload.salary
+    assert_equal 150000, employee2.reload.salary
+  end
+
+  def test_no_raises_for_all_bad_employees
+    employee = Employee.create( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
+    employee.give_review("bad negative less")
+    employee2 = Employee.create( name: "Lunk", email: "lunk@example.com", phone: "882-329-3843", salary: 150000)
+    employee2.give_review("bad negative less")
+    development = Department.create(name: "Development")
+    development.add_employee(employee)
+    development.add_employee(employee2)
+    development.give_raise(20000)
+    assert_equal 80000, employee.salary
     assert_equal 150000, employee2.salary
   end
-  #
-  # def test_no_raises_for_all_bad_employees
-  #   employee = Employee.new( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
-  #   employee.give_review("bad negative less")
-  #   employee2 = Employee.new( name: "Lunk", email: "lunk@example.com", phone: "882-329-3843", salary: 150000)
-  #   employee2.give_review("bad negative less")
-  #   development = Department.new("Development")
-  #   development.add_employee(employee)
-  #   development.add_employee(employee2)
-  #   development.give_raise(20000)
-  #   assert_equal 80000, employee.salary
-  #   assert_equal 150000, employee2.salary
-  # end
-  #
+
   def test_reviews_can_be_scanned_and_classified
     employee = Employee.create( name: "Zeke", salary: 100 )
     z_review = "Zeke is a very positive person and encourages those around him, but he has not done well technically this year.  There are two areas in which Zeke has room for improvement.  First, when communicating verbally (and sometimes in writing), he has a tendency to use more words than are required.  This conversational style does put people at ease, which is valuable, but it often makes the meaning difficult to isolate, and can cause confusion.
@@ -138,5 +138,7 @@ class ReviewsTest < Minitest::Test
     refute employee3.satisfactory?
     assert employee4.satisfactory?
   end
+
+  
 
 end
