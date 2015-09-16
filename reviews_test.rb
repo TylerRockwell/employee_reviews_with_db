@@ -2,7 +2,16 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './employee'
 require './department'
-require 'byebug'
+require './project_migration'
+require 'active_record'
+
+ActiveRecord::Base.establish_connection(
+  adapter:    'sqlite3',
+  database:   'hr.sqlite3'
+)
+
+ProjectMigration.migrate(:down)
+ProjectMigration.migrate(:up)
 
 class ReviewsTest < Minitest::Test
 
@@ -65,7 +74,7 @@ class ReviewsTest < Minitest::Test
   def test_employees_can_get_raises
     employee = Employee.new( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
     employee.give_raise(5000)
-    assert_equal 85000, employee.salary
+    assert_equal 85000, Employee.find(employee.id).salary
   end
 
   def test_whole_departments_can_get_raises
