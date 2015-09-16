@@ -13,11 +13,11 @@ class Department < ActiveRecord::Base
   end
 
   def total_salary
-    self.employees.sum(:salary)
+    employees.sum(:salary)
   end
 
   def give_raise(total_amount)
-    getting_raise = @employees.select {|e| e.satisfactory?}
+    getting_raise = employees.select {|e| e.satisfactory?}
     getting_raise.each {|e| e.give_raise(total_amount / getting_raise.length)}
   end
 end

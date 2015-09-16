@@ -10,7 +10,7 @@ class Employee < ActiveRecord::Base
   has_many :reviews
 
   def recent_review
-    @reviews.last
+    reviews.last
   end
 
   def satisfactory?
@@ -23,6 +23,7 @@ class Employee < ActiveRecord::Base
 
   def give_review(review)
     Review.create(employee_id: self.id, review: review)
+    assess_performance
   end
 
   def assess_performance
@@ -31,9 +32,9 @@ class Employee < ActiveRecord::Base
     good_terms = Regexp.union(good_terms)
     bad_terms = Regexp.union(bad_terms)
 
-    count_good = @reviews.last.scan(good_terms).length
-    count_bad = @reviews.last.scan(bad_terms).length
-
-    @satisfactory = (count_good - count_bad > 0)
+    recent_review = self.recent_review.review
+    count_good = recent_review.scan(good_terms).length
+    count_bad = recent_review.scan(bad_terms).length
+    self.update(satisfactory: count_good - count_bad > 0)
   end
 end
