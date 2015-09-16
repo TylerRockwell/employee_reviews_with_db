@@ -7,7 +7,8 @@ ActiveRecord::Base.establish_connection(
 
 class Employee < ActiveRecord::Base
   belongs_to :department
-  
+  has_many :reviews
+
   def recent_review
     @reviews.last
   end
@@ -21,8 +22,7 @@ class Employee < ActiveRecord::Base
   end
 
   def give_review(review)
-    @reviews << review
-    assess_performance
+    Review.create(employee_id: self.id, review: review)
     true
   end
 

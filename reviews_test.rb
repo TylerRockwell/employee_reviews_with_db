@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './employee'
 require './department'
+require './review'
 require './project_migration'
 require 'active_record'
 
@@ -57,12 +58,12 @@ class ReviewsTest < Minitest::Test
     development.add_employee(employee2)
     assert_equal 230000, development.total_salary
   end
-  #
-  # def test_employees_can_be_reviewed
-  #   employee = Employee.new(name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
-  #   assert employee.give_review("This employee started off great. Not as impressed with her recent performance.")
-  # end
-  #
+
+  def test_employees_can_be_reviewed
+    employee = Employee.create(name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
+    assert employee.give_review("This employee started off great. Not as impressed with her recent performance.")
+  end
+
   # def test_new_employees_should_be_satisfactory
   #   employee = Employee.new(name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
   #   assert employee.satisfactory?
