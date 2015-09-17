@@ -33,8 +33,13 @@ class Employee < ActiveRecord::Base
     bad_terms = Regexp.union(bad_terms)
 
     recent_review = self.recent_review.review
-    count_good = recent_review.scan(good_terms).length
-    count_bad = recent_review.scan(bad_terms).length
+    count_good = r_review.scan(good_terms).length
+    count_bad = r_review.scan(bad_terms).length
     self.update(satisfactory: count_good - count_bad > 0)
   end
+
+#   def find_palindrome_names
+#     #Employee.where(name: name.downcase == name.reverse.downcase)
+#     self.name.downcase.reverse == self.name.downcase
+#   end
 end

@@ -24,4 +24,16 @@ class Department < ActiveRecord::Base
   def number_of_employees
     employees.where(department_id: self.id).count(:id)
   end
+
+  def find_lowest_paid
+    employees.where(department_id: self.id).order(:salary).first
+  end
+
+  def sort_employees
+    employees.where(department_id: self.id).order(:name)
+  end
+
+  def find_cashflow_wormhole
+    employees.select {|e| e.salary > total_salary / number_of_employees}
+  end
 end

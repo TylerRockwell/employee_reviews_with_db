@@ -149,4 +149,39 @@ class ReviewsTest < Minitest::Test
     assert_equal 2, development.number_of_employees
   end
 
+  def test_can_find_lowest_paid
+    employee = Employee.create( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
+    employee2 = Employee.create( name: "Lunk", email: "lunk@example.com", phone: "882-329-3843", salary: 150000)
+    development = Department.create(name: "Development")
+    development.add_employee(employee)
+    development.add_employee(employee2)
+
+    assert_equal employee, development.find_lowest_paid
+  end
+
+  def test_alphabetical_employee_list_by_department
+    employee = Employee.create( name: "Zorldo", email: "ztp@example.com", phone: "515-888-4821", salary: 80000)
+    employee2 = Employee.create( name: "Lunk", email: "lunk@example.com", phone: "882-329-3843", salary: 150000)
+    development = Department.create(name: "Development")
+    development.add_employee(employee)
+    development.add_employee(employee2)
+
+    assert_equal [employee2, employee], development.sort_employees
+  end
+
+  def test_find_employees_above_average_pay
+    employee = Employee.create( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
+    employee2 = Employee.create( name: "Lunk", email: "lunk@example.com", phone: "882-329-3843", salary: 150000)
+    development = Department.create(name: "Development")
+    development.add_employee(employee)
+    development.add_employee(employee2)
+
+    assert_equal [employee2], development.find_cashflow_wormhole
+  end
+
+  # def test_can_find_palindromes
+  #   employee = Employee.create(name: "Hannah")
+  #   assert_equal [employee], employee.find_palindrome_names
+  # end
+
 end
